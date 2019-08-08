@@ -1,0 +1,18 @@
+version: '3'
+services:
+  smokeping-vlan41:
+    image: sarstw/smokeping-docker:2.7.3-slave
+    container_name: smokeping-vlan41
+    restart: unless-stopped
+    environment:
+      - MASTER_URL=
+      - SLAVE_NAME=
+      - SECRET=
+    networks:
+      macvlan:
+        ipv4_address: 10.0.98.41
+
+networks:
+  macvlan:
+    external: true
+
