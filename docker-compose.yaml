@@ -8,6 +8,8 @@ services:
       - MASTER_URL=
       - SLAVE_NAME=
       - SECRET=
+    volumes:
+      - ./nginx.conf:/etc/nginx/sites-enabled/default.conf
     networks:
       macvlan:
         ipv4_address: 10.0.98.41
