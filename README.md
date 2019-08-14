@@ -42,14 +42,6 @@ services:
       - TZ=Asia/Taipei
     volumes:
       - ./nginx.conf:/etc/nginx/sites-enabled/default
-      - ./Database:/etc/smokeping/config.d/Database
-      - ./General:/etc/smokeping/config.d/General
-      - ./Presentation:/etc/smokeping/config.d/Presentation
-      - ./Probes:/etc/smokeping/config.d/Probes
-      - ./Slaves:/etc/smokeping/config.d/Slaves
-      - ./Targets:/etc/smokeping/config.d/Targets
-      - ./smokeping_secrets:/etc/smokeping/smokeping_secrets
-      - ./smokeping_data:/var/lib/smokeping
 
   smokeping-slave:
     image: sarstw/smokeping-docker:ubuntu19.10-2.7.3-slave
