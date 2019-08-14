@@ -1,0 +1,49 @@
+# SmokePing Master/Slave in Docker
+
+## Prepare
+
+### For master
+
+Add smokeping_secrets file.
+
+```
+host1:mysercert
+host2:yoursercert
+boomer:lkasdf93uhhfdfddf
+```
+
+## Docker Compose
+
+docker-compose.yaml
+
+```
+version: '3'
+services:
+  smokeping-master:
+    image: sarstw/smokeping-docker:ubuntu19.10-2.7.3-master
+    container_name: smokeping-master
+    hostname: master
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Taipei
+    volumes:
+      - ./nginx.conf:/etc/nginx/sites-enabled/default
+      - ./Database:/etc/smokeping/config.d/Database
+      - ./General:/etc/smokeping/config.d/General
+      - ./Presentation:/etc/smokeping/config.d/Presentation
+      - ./Probes:/etc/smokeping/config.d/Probes
+      - ./Slaves:/etc/smokeping/config.d/Slaves
+      - ./Targets:/etc/smokeping/config.d/Targets
+      - ./smokeping_secrets:/etc/smokeping/smokeping_secrets
+      - ./smokeping_data:/var/lib/smokeping
+
+  smokeping-slave:
+    image: sarstw/smokeping-docker:ubuntu19.10-2.7.3-slave
+    container_name: smokeping-slave
+    restart: unless-stopped
+    environment:
+      - MASTER_URL=http://smokeping-master/smokeping/
+      - SLAVE_NAME=host2
+      - SECRET=yoursercert
+      - TZ=Asia/Taipei
+```
