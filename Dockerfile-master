@@ -1,6 +1,8 @@
-FROM debian:10.0-slim
+FROM ubuntu:19.10
 
-RUN apt-get update -y && apt-get install -y nginx smokeping spawn-fcgi supervisor \
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y && apt-get install -y tzdata ca-certificates nginx smokeping spawn-fcgi supervisor \
     && apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV TZ=Asia/Taipei

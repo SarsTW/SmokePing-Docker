@@ -1,6 +1,8 @@
-FROM debian:10.0-slim
+FROM ubuntu:19.10
 
-RUN apt-get update -y && apt-get install -y smokeping \
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y && apt-get install -y ca-certificates smokeping \
     && apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD start-slave.sh /
