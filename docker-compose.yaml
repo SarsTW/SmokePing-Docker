@@ -1,20 +1,29 @@
 version: '3'
 services:
-  smokeping-vlan41:
-    image: sarstw/smokeping-docker:2.7.3-slave
-    container_name: smokeping-vlan41
+  smokeping-master:
+    image: sarstw/smokeping-docker:ubuntu19.10-2.7.3-master
+    container_name: smokeping-master
+    hostname: master
     restart: unless-stopped
     environment:
-      - MASTER_URL=
-      - SLAVE_NAME=
-      - SECRET=
+      - TZ=Asia/Taipei
     volumes:
-      - ./nginx.conf:/etc/nginx/sites-enabled/default.conf
-    networks:
-      macvlan:
-        ipv4_address: 10.0.98.41
+      - ./nginx.conf:/etc/nginx/sites-enabled/default
+      - ./Database:/etc/smokeping/config.d/Database
+      - ./General:/etc/smokeping/config.d/General
+      - ./Presentation:/etc/smokeping/config.d/Presentation
+      - ./Probes:/etc/smokeping/config.d/Probes
+      - ./Slaves:/etc/smokeping/config.d/Slaves
+      - ./Targets:/etc/smokeping/config.d/Targets
+      - ./smokeping_secrets:/etc/smokeping/smokeping_secrets
+      - ./smokeping_data:/var/lib/smokeping
 
-networks:
-  macvlan:
-    external: true
-
+  smokeping-slave:
+    image: sarstw/smokeping-docker:ubuntu19.10-2.7.3-slave
+    container_name: smokeping-slave
+    restart: unless-stopped
+    environment:
+      - MASTER_URL=http://smokeping-master/smokeping/
+      - SLAVE_NAME=host2
+      - SECRET=yoursercert
+      - TZ=Asia/Taipei
