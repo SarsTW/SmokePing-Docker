@@ -4,12 +4,26 @@
 
 ### For master
 
-Add smokeping_secrets file.
+Modify smokeping_secrets file.
 
 ```
 host1:mysercert
 host2:yoursercert
 boomer:lkasdf93uhhfdfddf
+```
+
+Add slaves into `Targets` config.
+
+```
+slaves = host2
+```
+
+Add slaves into `Slaves` config.
+
+```
++host2
+display_name=host2
+color=00ff00
 ```
 
 ## Docker Compose
@@ -47,3 +61,8 @@ services:
       - SECRET=yoursercert
       - TZ=Asia/Taipei
 ```
+
+## URL
+
+[http://localhost:8080/smokeping/](http://localhost:8080/smokeping/)
+
