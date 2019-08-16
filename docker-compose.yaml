@@ -11,6 +11,10 @@ services:
       - 8080:80
     volumes:
       - ./nginx.conf:/etc/nginx/sites-enabled/default
+      - ./config.d/Database:/etc/smokeping/config.d/Database
+      - ./config.d/Probes:/etc/smokeping/config.d/Probes
+      - ./config.d/Slaves:/etc/smokeping/config.d/Slaves
+      - ./config.d/Targets:/etc/smokeping/config.d/Targets
         #- ./smokeping_data:/var/lib/smokeping
 
   smokeping-slave:
@@ -22,3 +26,4 @@ services:
       - SLAVE_NAME=host2
       - SECRET=yoursercert
       - TZ=Asia/Taipei
+

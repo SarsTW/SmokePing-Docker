@@ -1,0 +1,28 @@
+*** Probes ***
+
++ FPing
+
+binary = /usr/bin/fping
+
+
++ EchoPingHttp
+
+binary = /usr/bin/echoping
+forks = 5
+offset = 10%
+step = 60
+
+accept_redirects = yes
+ignore_cache = yes
+ipversion = 4
+port = 80
+tos = 0xa0
+
+
++ EchoPingHttps
+
+binary = /usr/bin/echoping
+forks = 5
+offset = 10%
+step = 60
+

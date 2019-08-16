@@ -12,8 +12,8 @@ ADD supervisord-smokeping.conf /etc/supervisor/conf.d/smokeping.conf
 ADD supervisord-fcgi.conf /etc/supervisor/conf.d/fcgi.conf
 ADD supervisord-nginx.conf /etc/supervisor/conf.d/nginx.conf
 
-RUN mkdir -p /var/run/smokeping /var/lib/smokeping
-RUN chown smokeping:www-data /var/run/smokeping /var/lib/smokeping
+RUN mkdir -p /var/run/smokeping /var/lib/smokeping/__cgi/Local/
+RUN chown -R smokeping:www-data /var/run/smokeping /var/lib/smokeping
 RUN chmod -R 777 /var/cache/smokeping /var/lib/smokeping
 RUN mv /usr/share/smokeping/www/smokeping.fcgi.dist /usr/share/smokeping/www/smokeping.fcgi
 
