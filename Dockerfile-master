@@ -2,7 +2,7 @@ FROM ubuntu:19.10
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update -y && apt-get install -y tzdata ca-certificates nginx smokeping spawn-fcgi supervisor \
+RUN apt-get update -y && apt-get install -y tzdata ca-certificates nginx smokeping curl spawn-fcgi supervisor \
     && apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV TZ=Asia/Taipei
